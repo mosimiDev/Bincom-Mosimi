@@ -1,0 +1,49 @@
+const { body } = document;
+
+function changeBackground(number) {
+ // Check if background is showing
+ let previousBackground;
+ if (body.className) {
+  previousBackground = body.className;
+ }
+ // Reset CSS class for Body
+ body.className = '';
+ switch (number) {
+  case '1':
+   return (previousBackground === 'background-1' ? false : body.classList.add('background-1'));
+  case '2':
+    return (previousBackground === 'background-2' ? false : body.classList.add('background-2'));
+  case '3':
+    return (previousBackground === 'background-3' ? false : body.classList.add('background-3'));
+  default:
+   break;
+ }
+}
+let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
